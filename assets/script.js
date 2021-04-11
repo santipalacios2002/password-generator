@@ -28,8 +28,17 @@ function generatePassword() {
   } else if (numbers) { // if user wants only numbers
     var rndStr = numbersStr.concat(alphabetLowerCaseStr, alphabetUpperCaseStr); //concatenates characters
     console.log (rndStr);
+  } else {  //if user only wants letters
+    var rndStr = alphabetLowerCaseStr.concat(alphabetUpperCaseStr); //concatenates characters
+    console.log(rndStr); // to be deleted soon
   }
-  var password = 'yourpassword';
+  //build the password string
+  password =  rndStr.charAt(Math.floor(Math.random() * rndStr.length));
+  for (var i = 0; i < lengthPassword-1; i++) {
+     password = password + rndStr.charAt(Math.floor(Math.random() * rndStr.length));
+  }
+
+  // var password = 'yourpassword'; delete soon
   return password;
 }
 
