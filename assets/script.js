@@ -22,20 +22,59 @@ function generatePassword() {
   }
   requestSC();
   requestNumbers();
-  console.log(`${lengthPassword}, ${specialCharacters} and ${numbers}`);
-  if (specialCharacters && numbers) { //if user wants special characters and numbers
+  requestLowerCase();
+  requestUpperCase();
+  console.log(`${lengthPassword}, ${specialCharacters} and ${numbers} and ${upperCase} and ${lowerCase}`);
+  if (specialCharacters && numbers && upperCase && lowerCase) { //if user wants special characters and numbers
     var rndStr = specialCharacterStr.concat(numbersStr, alphabetLowerCaseStr, alphabetUpperCaseStr); //concatenates all the characters
     console.log (rndStr);
-  } else if (specialCharacters) { //if user wants only special characters
-    var rndStr = specialCharacterStr.concat(alphabetLowerCaseStr, alphabetUpperCaseStr); //concatenates characters
+  } else if (specialCharacters && numbers && lowerCase) { //if user wants only special characters
+    var rndStr = specialCharacterStr.concat(numbersStr, alphabetLowerCaseStr); //concatenates characters
     console.log (rndStr);
-  } else if (numbers) { // if user wants only numbers
-    var rndStr = numbersStr.concat(alphabetLowerCaseStr, alphabetUpperCaseStr); //concatenates characters
+  } else if (specialCharacters && numbers && upperCase) { // if user wants only numbers
+    var rndStr = numbersStr.concat(numbersStr, alphabetUpperCaseStr); //concatenates characters
     console.log (rndStr);
-  } else {  //if user only wants letters
+  } else if (specialCharacters && lowerCase && upperCase) { //if user wants only special characters
+    var rndStr = specialCharacterStr.concat(alphabetUpperCaseStr, alphabetLowerCaseStr); //concatenates characters
+    console.log (rndStr);
+  } else if (numbers && lowerCase && upperCase) { //if user wants only special characters
+    var rndStr = numbers.concat(alphabetUpperCaseStr, alphabetLowerCaseStr); //concatenates characters
+    console.log (rndStr);
+  } else if (specialCharacters && numbers) { //if user wants only special characters
+    var rndStr = specialCharacterStr.concat(numbersStr); //concatenates characters
+    console.log (rndStr);
+  } else if (specialCharacters && lowerCase) { //if user wants only special characters
+    var rndStr = specialCharacterStr.concat(alphabetLowerCaseStr); //concatenates characters
+    console.log (rndStr);
+  } else if (specialCharacters && upperCase) { //if user wants only special characters
+    var rndStr = specialCharacterStr.concat(alphabetUpperCaseStr); //concatenates characters
+    console.log (rndStr);
+  } else if (numbers && lowerCase) { //if user wants only special characters
+    var rndStr = numbersStr.concat(alphabetLowerCaseStr); //concatenates characters
+    console.log (rndStr);
+  } else if (numbers && upperCase) { //if user wants only special characters
+    var rndStr = numbersStr.concat(alphabetUpperCaseStr); //concatenates characters
+    console.log (rndStr);
+  } else if (lowerCase && upperCase) { //if user wants only special characters
     var rndStr = alphabetLowerCaseStr.concat(alphabetUpperCaseStr); //concatenates characters
-    console.log(rndStr); // to be deleted soon
+    console.log (rndStr);
+  } else if (specialCharacters) { //if user wants only special characters
+    var rndStr = specialCharacterStr; //concatenates characters
+    console.log (rndStr);
+  } else if (numbers) { //if user wants only special characters
+    var rndStr = numbersStr; //concatenates characters
+    console.log (rndStr);
+  } else if (lowerCase) { //if user wants only special characters
+    var rndStr = alphabetLowerCaseStr; //concatenates characters
+    console.log (rndStr);
+  } else if (upperCase) { //if user wants only special characters
+    var rndStr = alphabetUpperCaseStr; //concatenates characters
+    console.log (rndStr);
+  } else {
+    alert('You must choose at least one character type');
+    generatePassword();
   }
+
   //build the password string
   password =  rndStr.charAt(Math.floor(Math.random() * rndStr.length));
   for (var i = 0; i < lengthPassword-1; i++) {
@@ -91,6 +130,19 @@ function requestNumbers() {
     numbers = confirm('Press OK if you want numbers on your password')
 }
 
+// initializes numbers boolean
+var lowerCase;
+//funtion request if lowercase
+function requestLowerCase() {
+    lowerCase = confirm('Press OK if you want lowercase on your password')
+}
+
+// initializes numbers boolean
+var upperCase;
+//funtion request if uppercase
+function requestUpperCase() {
+    upperCase = confirm('Press OK if you want uppercase on your password')
+}
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
