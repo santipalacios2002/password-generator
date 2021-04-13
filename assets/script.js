@@ -16,6 +16,10 @@ var alphabetUpperCaseStr = alphabetLowerCaseStr.toUpperCase();
 //function that generates the password
 function generatePassword() {
   requestLength();
+  if (lengthPassword === null) {
+    // writePasswordAgain(); trying to define a message to avoid undefined
+    return;
+  }
   requestSC();
   requestNumbers();
   console.log(`${lengthPassword}, ${specialCharacters} and ${numbers}`);
@@ -38,7 +42,7 @@ function generatePassword() {
      password = password + rndStr.charAt(Math.floor(Math.random() * rndStr.length));
   }
 
-  // var password = 'yourpassword'; delete soon
+
   return password;
 }
 
@@ -49,12 +53,26 @@ function writePassword() {
   passwordText.value = password;
 }
 
+//  ==========================================================
+//  Ask in class. trying to give a message or avoid undefined
+//  ==========================================================
+// function writePasswordAgain() {
+//   console.log('this ran');
+//   document.getElementById('#password').innerHTML = 'please generate password again';
+// }
+// if (typeof passwordText.value !== "undefined") {
+// }
+
 // initializes length of password
 var lengthPassword;
 //function request character length
 function requestLength() {
   lengthPassword = prompt('Please choose the length of the password (between 8-128)');
-  if ( lengthPassword > 128 || lengthPassword < 8 ) {
+  // If user pressed Cancel, immediately end function
+  if (!lengthPassword) {
+    return;
+  }
+  if ( lengthPassword > 128 || lengthPassword < 8 || isNaN(lengthPassword) ) {
     requestLength();
   }
 }
@@ -72,7 +90,6 @@ var numbers;
 function requestNumbers() {
     numbers = confirm('Press OK if you want numbers on your password')
 }
-
 
 
 // Add event listener to generate button
