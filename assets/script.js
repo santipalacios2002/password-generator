@@ -7,19 +7,24 @@ var specialCharacterStr = ' !\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~';
 //number string declared
 var numbersStr = '0123456789';
 
-//alphabet string declared
+//alphabet lowercase string declared
 var alphabetLowerCaseStr = 'abcdefghijklmnopqrstuvwxyz'
 
 //alphabet uppercase string declared
 var alphabetUpperCaseStr = alphabetLowerCaseStr.toUpperCase();
 
+
 //function that generates the password
 function generatePassword() {
   requestLength();
+  
+  //if use hits cancel, this changes the placeholder info to Please try again
   if (lengthPassword === null) {
-    // writePasswordAgain(); trying to define a message to avoid undefined
-    return;
-  }
+    var x = document.getElementById('password').placeholder;
+    x = 'Please try again';
+    return x
+  } 
+
   requestSC();
   requestNumbers();
   requestLowerCase();
@@ -80,9 +85,8 @@ function generatePassword() {
   for (var i = 0; i < lengthPassword-1; i++) {
      password = password + rndStr.charAt(Math.floor(Math.random() * rndStr.length));
   }
-
-
   return password;
+  
 }
 
 // Write password to the #password input
@@ -91,16 +95,6 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
   passwordText.value = password;
 }
-
-//  ==========================================================
-//  Ask in class. trying to give a message or avoid undefined
-//  ==========================================================
-// function writePasswordAgain() {
-//   console.log('this ran');
-//   document.getElementById('#password').innerHTML = 'please generate password again';
-// }
-// if (typeof passwordText.value !== "undefined") {
-// }
 
 // initializes length of password
 var lengthPassword;
@@ -111,7 +105,7 @@ function requestLength() {
   if (!lengthPassword) {
     return;
   }
-  if ( lengthPassword > 128 || lengthPassword < 8 || isNaN(lengthPassword) ) {
+  if ( lengthPassword > 128 || lengthPassword < 8 || isNaN(lengthPassword) || lengthPassword === ""  ) {
     requestLength();
   }
 }
@@ -143,6 +137,7 @@ var upperCase;
 function requestUpperCase() {
     upperCase = confirm('Press OK if you want uppercase on your password')
 }
+
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
