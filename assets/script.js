@@ -11,6 +11,22 @@ var alphabetUpperCaseStr = alphabetLowerCaseStr.toUpperCase();
 //random string declared
 var rndStr = '';
 
+// initializes length of password
+var lengthPassword;
+// initializes spacialCaracters boolean
+var specialCharacters;
+// initializes numbers boolean
+var numbers;
+// initializes numbers boolean
+var lowerCase;
+// initializes numbers boolean
+var upperCase;
+// initializes numbers choice
+var hasNumbers;
+
+
+
+
 //function that generates the password
 function generatePassword() {
   requestLength();
@@ -27,7 +43,7 @@ function generatePassword() {
   requestNumbers();
   requestLowerCase();
   requestUpperCase();
-
+  console.log(rndStr);
   if (rndStr.length === 0) {
     alert('You must choose at least one character type');
     generatePassword();
@@ -38,6 +54,17 @@ function generatePassword() {
   for (var i = 0; i < lengthPassword-1; i++) {
      password = password + rndStr.charAt(Math.floor(Math.random() * rndStr.length));
   }
+
+  // =============== ensures that you get at least one number ===============////
+  if (!password.includes('0') && hasNumbers) {                               ////
+    console.log('this ran')
+    console.log(`old password ${password}`)                                  ////
+    var x = password.charAt(Math.floor(Math.random() * password.length));    ////
+    console.log(`character replaced was ${x}`);                              ////
+    password = password.replace(x, Math.floor(Math.random() * 10));          ////
+  }                                                                          ////
+  //=========================================================================////
+
   return password;
   
 }
@@ -49,8 +76,6 @@ function writePassword() {
   passwordText.value = password;
 }
 
-// initializes length of password
-var lengthPassword;
 //function request character length
 function requestLength() {
   lengthPassword = prompt('Please choose the length of the password (between 8-128)');
@@ -62,50 +87,44 @@ function requestLength() {
   }
 }
 
-// initializes spacialCaracters boolean
-var specialCharacters;
 //funtion request if special characters
 function requestSC() {
     specialCharacters = confirm('Press OK if you want special characters on your password')
     if (specialCharacters) {
       rndStr = rndStr + specialCharacterStr;
-      console.log(rndStr);
+      // console.log(rndStr);
     } 
 }
 
-// initializes numbers boolean
-var numbers;
 //funtion request if numbers
 function requestNumbers() {
     numbers = confirm('Press OK if you want numbers on your password')
     if (numbers) {
       rndStr = rndStr + numbersStr;
-      console.log(rndStr);
+      hasNumbers = numbers;
+      // console.log(rndStr);
+    } else {
+      hasNumbers = numbers;
     }
 }
 
-// initializes numbers boolean
-var lowerCase;
 //funtion request if lowercase
 function requestLowerCase() {
     lowerCase = confirm('Press OK if you want lowercase on your password')
     if (lowerCase) {
       rndStr = rndStr + alphabetLowerCaseStr;
-      console.log(rndStr);
+      // console.log(rndStr);
     }
 }
 
-// initializes numbers boolean
-var upperCase;
 //funtion request if uppercase
 function requestUpperCase() {
     upperCase = confirm('Press OK if you want uppercase on your password')
     if (upperCase) {
       rndStr = rndStr + alphabetUpperCaseStr;
-      console.log(rndStr);
+      // console.log(rndStr);
     }
 }
-
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
