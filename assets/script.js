@@ -25,9 +25,6 @@ var upperCase;
 // initializes numbers choice
 var hasNumbers;
 
-
-
-
 //function that generates the password
 function generatePassword() {
   // console.log('checking generate password ....')
@@ -164,6 +161,3 @@ function copyFunction() {
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 copyBtn.addEventListener('click', copyFunction);
-
-
-
