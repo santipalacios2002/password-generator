@@ -30,6 +30,7 @@ var hasNumbers;
 
 //function that generates the password
 function generatePassword() {
+  console.log('checking generate password ....')
   requestLength();
   
   // === if use hits cancel, this changes the placeholder info to Please try again ===////
@@ -80,6 +81,7 @@ function generatePassword() {
 
 // Write password to the #password input
 function writePassword() {
+  console.log('checking writepassword')
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
   passwordText.value = password;
@@ -87,11 +89,14 @@ function writePassword() {
 
 //function request character length
 function requestLength() {
+  console.log(' before ' + lengthPassword)
   lengthPassword = prompt('Please choose the length of the password (between 8-128)');
-  // If user pressed Cancel, immediately end function
+  console.log(' after ' + lengthPassword)
+  // If user pressed Cancel, immediately end function or check of the value entered 
   if (!lengthPassword) {
     return;
   }else if ( lengthPassword > 128 || lengthPassword < 8 || isNaN(lengthPassword) || !Number.isInteger(lengthPassword) ) {
+    console.log('else if ran')
     requestLength();
   }
 }
