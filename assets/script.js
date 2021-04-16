@@ -30,7 +30,7 @@ var hasNumbers;
 
 //function that generates the password
 function generatePassword() {
-  console.log('checking generate password ....')
+  // console.log('checking generate password ....')
   requestLength();
   
   // === if use hits cancel, this changes the placeholder info to Please try again ===////
@@ -40,11 +40,11 @@ function generatePassword() {
     return x                                                                          ////
   }                                                                                   ////
   //==================================================================================////
-  console.log(`This is the string ${rndStr} with length ${lengthPassword.length}`);
+  // console.log(`This is the string ${rndStr} with length ${lengthPassword.length}`);
 
   //prevents the prompt to continue without a valid value for the password length
   if (lengthPassword.length === 0) {
-    console.log('they pressed ok without assigning a length of password')
+    // console.log('they pressed ok without assigning a length of password')
     return 'Please try again';
   }
   
@@ -53,7 +53,7 @@ function generatePassword() {
   requestNumbers();
   requestLowerCase();
   requestUpperCase();
-  console.log(rndStr);
+  // console.log(rndStr);
   if (rndStr.length === 0) {
     alert('You must choose at least one character type');
     generatePassword();
@@ -67,10 +67,10 @@ function generatePassword() {
 
   // =============== ensures that you get at least one number ===============////
   if (!password.includes('0') && hasNumbers) {                               ////
-    console.log('this ran')
-    console.log(`old password ${password}`)                                  ////
+    // console.log('this ran')                                               ////
+    // console.log(`old password ${password}`)                               ////
     var x = password.charAt(Math.floor(Math.random() * password.length));    ////
-    console.log(`character replaced was ${x}`);                              ////
+    // console.log(`character replaced was ${x}`);                           ////
     password = password.replace(x, Math.floor(Math.random() * 10));          ////
   }                                                                          ////
   //=========================================================================////
@@ -81,7 +81,7 @@ function generatePassword() {
 
 // Write password to the #password input
 function writePassword() {
-  console.log('checking writepassword')
+  // console.log('checking writepassword')
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
   passwordText.value = password;
@@ -89,14 +89,20 @@ function writePassword() {
 
 //function request character length
 function requestLength() {
-  console.log(' before ' + lengthPassword)
+  // console.log(' before ' + lengthPassword)
   lengthPassword = prompt('Please choose the length of the password (between 8-128)');
-  console.log(' after ' + lengthPassword)
-  // If user pressed Cancel, immediately end function or check of the value entered 
+  // console.log(' after ' + lengthPassword)
+  // console.log(`First condition is: ${Boolean(lengthPassword > 128)}`)
+  // console.log(`Second condition is: ${Boolean(lengthPassword < 8)}`)
+  // console.log(`Third condition is: ${isNaN(lengthPassword)}`)
+  // console.log(`Fourth condition is: ${!(parseFloat(lengthPassword) == parseInt(lengthPassword))}`)
+
+
+  // If user pressed Cancel, immediately end function or check of the value entered that is a valid value
   if (!lengthPassword) {
     return;
-  }else if ( lengthPassword > 128 || lengthPassword < 8 || isNaN(lengthPassword) || !Number.isInteger(lengthPassword) ) {
-    console.log('else if ran')
+  }else if ( lengthPassword > 128 || lengthPassword < 8 || isNaN(lengthPassword) || !(parseFloat(lengthPassword) == parseInt(lengthPassword))) {
+    // console.log('else if ran')
     requestLength();
   }
 }
