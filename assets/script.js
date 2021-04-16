@@ -39,6 +39,14 @@ function generatePassword() {
     return x                                                                          ////
   }                                                                                   ////
   //==================================================================================////
+  console.log(`This is the string ${rndStr} with length ${lengthPassword.length}`);
+
+  //prevents the prompt to continue without a valid value for the password length
+  if (lengthPassword.length === 0) {
+    console.log('they pressed ok without assigning a length of password')
+    return 'Please try again';
+  }
+  
 
   requestSC();
   requestNumbers();
@@ -83,7 +91,7 @@ function requestLength() {
   // If user pressed Cancel, immediately end function
   if (!lengthPassword) {
     return;
-  }else if ( lengthPassword > 128 || lengthPassword < 8 || isNaN(lengthPassword) ) {
+  }else if ( lengthPassword > 128 || lengthPassword < 8 || isNaN(lengthPassword) || !Number.isInteger(lengthPassword) ) {
     requestLength();
   }
 }
