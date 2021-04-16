@@ -28,9 +28,11 @@ User is prompted to choose:
 
 ## :heavy_check_mark: Criteria validation
 
+ * User must choose at least one character type
+ 
 ![Criteria validation](./assets/images/criteria.gif)
 
-User must choose at least one character type
+
 <br />
 
 ## :heavy_check_mark: Additional features 
